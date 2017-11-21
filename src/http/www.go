@@ -151,7 +151,7 @@ func ConfigWebHTTP() {
 		defer sess.SessionRelease(w)
 		if sess.Get("openid") == nil {
 			log.Println("需要在微信中打开")
-			return
+			getuser(w, r)
 		}
 		openid := sess.Get("openid").(string)
 		uuid := model.CreateNewID(12)
