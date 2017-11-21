@@ -66,6 +66,7 @@ func ConfigWebHTTP() {
 
 	// 用户上传图片
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
+		getuser(w, r)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "index.html")
 		if !file.IsExist(f) {
@@ -145,7 +146,6 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
-		getuser(w, r)
 		t := time.Now()
 		r.ParseMultipartForm(32 << 20)
 		sess, _ := globalSessions.SessionStart(w, r)
