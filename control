@@ -45,7 +45,7 @@ function start() {
         echo "Config file $conf doesn't exist, creating one."
         cp cfg.example.json $conf
     fi
-    nohup bin/$app -c $conf >> $logfile &
+    nohup bin/$app -c $conf > $logfile 2>&1 &
     echo $! > $pidfile
     echo "$app started..., pid=$!"
 
