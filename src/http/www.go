@@ -145,13 +145,13 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
+		getuser(w, r)
 		t := time.Now()
 		r.ParseMultipartForm(32 << 20)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		if sess.Get("openid") == nil {
 			log.Println("需要在微信中打开")
-			getuser(w, r)
 		}
 		openid := sess.Get("openid").(string)
 		uuid := model.CreateNewID(12)
