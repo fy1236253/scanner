@@ -25,7 +25,8 @@ func CreatImgRecord(uuid, openid, info string) {
 	conn, _ := g.GetDBConn("default")
 	stmt, err := conn.Prepare("INSERT upload_log SET uuid=?,openid=?,info=?")
 	log.Println(err)
-	stmt.Exec(uuid, openid, info)
+	_, e := stmt.Exec(uuid, openid, info)
+	log.Println(e)
 }
 
 // QueryImgRecord 查询uuid记录

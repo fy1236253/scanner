@@ -105,6 +105,7 @@ func ConfigWebHTTP() {
 			return
 		}
 		// 基本参数设置
+		log.Println(uuid)
 		info := model.QueryImgRecord(uuid)
 		data := struct {
 			UUID string
@@ -115,7 +116,7 @@ func ConfigWebHTTP() {
 		}
 		log.Println(info)
 		t, err := template.ParseFiles(f)
-		log.Println(err)
+		// log.Println(err)
 		err = t.Execute(w, data)
 		if err != nil {
 			log.Println(err)
