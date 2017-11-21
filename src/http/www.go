@@ -113,6 +113,7 @@ func ConfigWebHTTP() {
 			UUID: uuid,
 			Info: info,
 		}
+		log.Println(info)
 		t, err := template.ParseFiles(f)
 		log.Println(err)
 		err = t.Execute(w, data)
