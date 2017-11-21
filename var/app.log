@@ -1,0 +1,130 @@
+2017/11/21 15:43:48 g.ParseConfig ok, file cfg.json
+2017/11/21 15:43:48 g.ParseConfig ok
+2017/11/21 15:43:48 g.InitDB,get db fail
+2017/11/21 15:43:48 g.InitDB ok
+PID.11801 2017/11/21 15:43:48 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.11801 2017/11/21 15:49:05 server.go:2317: http: panic serving 127.0.0.1:54179: interface conversion: interface is nil, not string
+goroutine 23 [running]:
+net/http.(*conn).serve.func1(0xc4201e5280)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1491 +0x12a
+panic(0x3c1f60, 0xc4202c8c80)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:458 +0x243
+http.ConfigWebHTTP.func4(0x5eaf20, 0xc4201fbc70, 0xc420204a50)
+	/Users/fengya/pro/ScanTicket/src/http/www.go:152 +0x1c0
+net/http.HandlerFunc.ServeHTTP(0x462a78, 0x5eaf20, 0xc4201fbc70, 0xc420204a50)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1726 +0x44
+net/http.(*ServeMux).ServeHTTP(0x60c7c0, 0x5eaf20, 0xc4201fbc70, 0xc420204a50)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2022 +0x7f
+net/http.serverHandler.ServeHTTP(0xc4201e4000, 0x5eaf20, 0xc4201fbc70, 0xc420204a50)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2202 +0x7d
+net/http.(*conn).serve(0xc4201e5280, 0x5eb660, 0xc4202c8b40)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1579 +0x4b7
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2293 +0x44d
+PID.11801 2017/11/21 15:56:20 www.go:72: not find /Users/fengya/pro/ScanTicket/public/scan.html
+PID.11801 2017/11/21 15:56:41 main.go:45: all service stopping...
+PID.11801 2017/11/21 15:56:41 main.go:46: all service stop ok 
+2017/11/21 16:00:11 g.ParseConfig ok, file cfg.json
+2017/11/21 16:00:11 g.ParseConfig ok
+2017/11/21 16:00:11 g.InitDB,get db fail
+2017/11/21 16:00:11 g.InitDB ok
+PID.12294 2017/11/21 16:00:11 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.12294 2017/11/21 16:00:21 www.go:72: not find /Users/fengya/pro/ScanTicket/public/scan.html
+PID.12294 2017/11/21 16:01:04 main.go:45: all service stopping...
+PID.12294 2017/11/21 16:01:04 main.go:46: all service stop ok 
+2017/11/21 16:01:05 g.ParseConfig ok, file cfg.json
+2017/11/21 16:01:05 g.ParseConfig ok
+2017/11/21 16:01:05 g.InitDB,get db fail
+2017/11/21 16:01:05 g.InitDB ok
+PID.12347 2017/11/21 16:01:05 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.12347 2017/11/21 16:03:00 main.go:45: all service stopping...
+PID.12347 2017/11/21 16:03:00 main.go:46: all service stop ok 
+2017/11/21 16:03:01 g.ParseConfig ok, file cfg.json
+2017/11/21 16:03:01 g.ParseConfig ok
+2017/11/21 16:03:01 g.InitDB,get db fail
+2017/11/21 16:03:01 g.InitDB ok
+PID.12441 2017/11/21 16:03:01 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.12441 2017/11/21 16:15:15 main.go:45: all service stopping...
+PID.12441 2017/11/21 16:15:15 main.go:46: all service stop ok 
+2017/11/21 16:15:16 g.ParseConfig ok, file cfg.json
+2017/11/21 16:15:16 g.ParseConfig ok
+2017/11/21 16:15:16 g.InitDB,get db fail
+2017/11/21 16:15:16 g.InitDB ok
+PID.12703 2017/11/21 16:15:16 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.12703 2017/11/21 16:16:41 main.go:45: all service stopping...
+PID.12703 2017/11/21 16:16:41 main.go:46: all service stop ok 
+2017/11/21 16:16:42 g.ParseConfig ok, file cfg.json
+2017/11/21 16:16:42 g.ParseConfig ok
+2017/11/21 16:16:42 g.InitDB ok
+PID.12766 2017/11/21 16:16:42 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.12766 2017/11/21 16:41:23 main.go:45: all service stopping...
+PID.12766 2017/11/21 16:41:23 main.go:46: all service stop ok 
+2017/11/21 16:47:44 g.ParseConfig ok, file cfg.json
+2017/11/21 16:47:44 g.ParseConfig ok
+2017/11/21 16:47:44 g.InitDB ok
+PID.751 2017/11/21 16:47:44 http.go:63: http.Start ok, listening on 127.0.0.1:6061
+PID.751 2017/11/21 17:09:28 main.go:45: all service stopping...
+PID.751 2017/11/21 17:09:28 main.go:46: all service stop ok 
+2017/11/21 17:09:29 g.ParseConfig ok, file cfg.json
+2017/11/21 17:09:29 g.ParseConfig ok
+2017/11/21 17:09:29 g.InitDB ok
+PID.1769 2017/11/21 17:09:29 http.go:63: http.Start ok, listening on 127.0.0.1:80
+PID.1769 2017/11/21 17:09:29 http.go:64: listen tcp 127.0.0.1:80: bind: permission denied
+2017/11/21 17:10:47 g.ParseConfig ok, file cfg.json
+2017/11/21 17:10:47 g.ParseConfig ok
+2017/11/21 17:10:47 g.InitDB ok
+PID.1834 2017/11/21 17:10:47 http.go:63: http.Start ok, listening on 127.0.0.1:8080
+PID.1834 2017/11/21 17:17:54 server.go:2317: http: panic serving 127.0.0.1:50397: interface conversion: interface is nil, not string
+goroutine 19 [running]:
+net/http.(*conn).serve.func1(0xc4201dc100)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1491 +0x12a
+panic(0x3c1f60, 0xc4202cc8c0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:458 +0x243
+http.ConfigWebHTTP.func4(0x5eaf20, 0xc4201e4d00, 0xc4201f05a0)
+	/Users/fengya/pro/ScanTicket/src/http/www.go:152 +0x1c0
+net/http.HandlerFunc.ServeHTTP(0x462a78, 0x5eaf20, 0xc4201e4d00, 0xc4201f05a0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1726 +0x44
+net/http.(*ServeMux).ServeHTTP(0x60c7c0, 0x5eaf20, 0xc4201e4d00, 0xc4201f05a0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2022 +0x7f
+net/http.serverHandler.ServeHTTP(0xc4201dc000, 0x5eaf20, 0xc4201e4d00, 0xc4201f05a0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2202 +0x7d
+net/http.(*conn).serve(0xc4201dc100, 0x5eb660, 0xc4201ae200)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1579 +0x4b7
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2293 +0x44d
+PID.1834 2017/11/21 17:17:55 server.go:2317: http: panic serving 127.0.0.1:50433: interface conversion: interface is nil, not string
+goroutine 22 [running]:
+net/http.(*conn).serve.func1(0xc4201dd100)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1491 +0x12a
+panic(0x3c1f60, 0xc4202ccb00)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:458 +0x243
+http.ConfigWebHTTP.func4(0x5eaf20, 0xc4201e4ea0, 0xc4201f0690)
+	/Users/fengya/pro/ScanTicket/src/http/www.go:152 +0x1c0
+net/http.HandlerFunc.ServeHTTP(0x462a78, 0x5eaf20, 0xc4201e4ea0, 0xc4201f0690)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1726 +0x44
+net/http.(*ServeMux).ServeHTTP(0x60c7c0, 0x5eaf20, 0xc4201e4ea0, 0xc4201f0690)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2022 +0x7f
+net/http.serverHandler.ServeHTTP(0xc4201dc000, 0x5eaf20, 0xc4201e4ea0, 0xc4201f0690)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2202 +0x7d
+net/http.(*conn).serve(0xc4201dd100, 0x5eb660, 0xc4202cc940)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1579 +0x4b7
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2293 +0x44d
+PID.1834 2017/11/21 17:18:35 server.go:2317: http: panic serving 127.0.0.1:50504: interface conversion: interface is nil, not string
+goroutine 24 [running]:
+net/http.(*conn).serve.func1(0xc4201dd400)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1491 +0x12a
+panic(0x3c1f60, 0xc4202ccd80)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:458 +0x243
+http.ConfigWebHTTP.func4(0x5eaf20, 0xc4201e4f70, 0xc4201f0870)
+	/Users/fengya/pro/ScanTicket/src/http/www.go:152 +0x1c0
+net/http.HandlerFunc.ServeHTTP(0x462a78, 0x5eaf20, 0xc4201e4f70, 0xc4201f0870)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1726 +0x44
+net/http.(*ServeMux).ServeHTTP(0x60c7c0, 0x5eaf20, 0xc4201e4f70, 0xc4201f0870)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2022 +0x7f
+net/http.serverHandler.ServeHTTP(0xc4201dc000, 0x5eaf20, 0xc4201e4f70, 0xc4201f0870)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2202 +0x7d
+net/http.(*conn).serve(0xc4201dd400, 0x5eb660, 0xc4202ccbc0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:1579 +0x4b7
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/net/http/server.go:2293 +0x44d

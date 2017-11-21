@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/scan.css">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <link rel="icon" sizes="any" mask="" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <title>药品单扫描</title>
+</head>
+<style>
+    ul {
+        margin: 0;
+    }
+</style>
+
+<body class="content-body">
+    <div class="container weui-tab" id="tab">
+        <header>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="col-xs-6  col-sm-6 col-md-6 col-lg-6 col-md-offset-3 col-xs-offset-3 col-sm-offset-3 col-lg-offset-3">
+                    <img src="img/company.png" class="img-responsive company-img" alt="Image">
+                </div>
+            </div>
+        </header>
+        <div class="weui-tab">
+            <p class="mtop20 color-white">请保持小票平整，小票票头，票尾在框内</p>
+            <div class="weui-cells weui-cells_form" id="uploaderCustom">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader">
+                            <div class="weui-uploader__hd">
+                                <p class="weui-uploader__title">图片上传</p>
+                            </div>
+                            <div class="weui-uploader__bd">
+                                <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
+                                <div class="weui-uploader__input-box">
+                                    <input id="uploaderCustomInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a>
+            </div>
+        </div>
+        <footer>客服电话:0575-88137870</footer>
+    </div>
+
+</body>
+
+</html>
+<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<script type="text/javascript">
+    /* 图片手动上传 */
+    var uploadCustomFileList = [];
+    var uploadCount = 0;
+    var uploadNum = 0;
+    // 这里是简单的调用，其余api请参考文档
+    weui.uploader('#uploaderCustom', {
+        url: '/uploadImg',
+        auto: false,
+        fileVal: 'img',
+        onQueued: function () {
+            uploadCustomFileList.push(this);
+        },
+        onSuccess: function (res) {
+            if (res.errMsg == "success") {
+                weui.loading('loading').hide();
+                weui.toast('操作成功', 2000);
+                window.location.href = "/consumer?uuid=" + res.uuid
+            } else {
+                if (uploadNum >= 2) {
+                    weui.alert('你的图片已提交人工审核！请耐心等待');
+                    weui.loading('loading').hide();
+                    $(".weui-uploader__files").empty();
+                    uploadCustomFileList = []
+                    --uploadCount;
+                    ++uploadNum;
+                    return
+                }
+                weui.alert('图片识别失败，请重新上传');
+                weui.loading('loading').hide();
+                $(".weui-uploader__files").empty();
+                uploadCustomFileList = []
+                --uploadCount;
+                ++uploadNum;
+            }
+        },
+        onError: function (err) {
+            console.log(this, err);
+            weui.loading('loading').hide();
+            // return true; // 阻止默认行为，不使用默认的失败态
+        },
+        onBeforeQueued: function (files) {
+            // `this` 是轮询到的文件, `files` 是所有文件
+
+            if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+                weui.alert('请上传图片');
+                return false; // 阻止文件添加
+            }
+            if (this.size > 4 * 1024 * 1024) {
+                weui.alert('请上传不超过4M的图片');
+                return false;
+            }
+            if (files.length > 1) { // 防止一下子选择过多文件
+                weui.alert('最多只能上传1张图片，请重新选择');
+                return false;
+            }
+            if (uploadCount + 1 > 1) {
+                weui.alert('最多只能上传1张图片');
+                return false;
+            }
+            ++uploadCount;
+        },
+        onBeforeSend: function (data, headers) {
+            // console.log(this, data, headers);
+            $.extend(data, { "rate": uploadNum })
+        }
+    });
+
+    // 手动上传按钮
+    document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
+        uploadCustomFileList.forEach(function (file) {
+            weui.loading('识别中')
+            console.log(uploadNum)
+            file.upload();
+        });
+    });
+
+    // 缩略图预览
+    document.querySelector('#uploaderCustomFiles').addEventListener('click', function (e) {
+        var target = e.target;
+
+        while (!target.classList.contains('weui-uploader__file') && target) {
+            target = target.parentNode;
+        }
+        if (!target) return;
+
+        var url = target.getAttribute('style') || '';
+        var id = target.getAttribute('data-id');
+
+        if (url) {
+            url = url.match(/url\((.*?)\)/)[1].replace(/"/g, '');
+        }
+        var gallery = weui.gallery(url, {
+            onDelete: function () {
+                weui.confirm('确定删除该图片？', function () {
+                    var index;
+                    for (var i = 0, len = uploadCustomFileList.length; i < len; ++i) {
+                        var file = uploadCustomFileList[i];
+                        if (file.id == id) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index !== undefined) uploadCustomFileList.splice(index, 1);
+                    --uploadCount
+                    target.remove();
+                    gallery.hide();
+                });
+            }
+        });
+    });
+</script>

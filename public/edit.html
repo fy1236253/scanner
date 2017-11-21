@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <link rel="stylesheet" href="css/scan.css">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">    
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <title>手工填写图片信息</title>
+</head>
+
+<body>
+    <div class="am-container am-text-xs">
+        <header>
+            <div class="row mtop40">
+                <div class="am-u-lg-12 am-u-sm-12 am-u-md-12 ">
+                    <div class="am-u-lg-4  am-u-sm-4 am-u-md-4 col-lg-4 am-u-md-offset-4 am-u-lg-offset-4 am-u-sm-offset-4 col-lg-offset-4">
+                        <img src="img/company.png" class="img-responsive company-img" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="am-u-lg-12 am-u-sm-12 am-u-md-12">
+            <img src="upload/{{.UUID}}.jpg" class="mtop20 am-img-responsive" alt="Image">
+        </div>
+        <form role="form" id="from" action="/edit_img" method="POST">
+            <div class="am-form-group">
+                <input type="number" name="no" class="am-form-field" placeholder="订单编号" required>
+            </div>
+            <div class="am-form-group">
+                <input type="text" id="name" name="name" class="am-form-field" placeholder="药店名称" required>
+            </div>
+            <div class="am-form-group">
+                <input type="number" id="amount" name="amount" class="am-form-field" placeholder="金额汇总" required>
+            </div>
+            <div class="inputlist " id="">
+                <div class="am-g am-g-3 am-form-group addinput" id="wrapInput">
+                    <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
+                        <input type="number" name="count" class="am-form-field" placeholder="数量">
+                    </div>
+                    <div class=" am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
+                        <input type="number" name="price" class="am-form-field" placeholder="单价">
+
+                    </div>
+                    <div class="am-u-sm-8 am-u-md-8 am-u-lg-8 am-padding-0">
+                        <input type="text" name="drug" class="am-form-field" placeholder="药品名称">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="am-form-group am-form-inline">
+                <button id="addinput" type="button" class=" am-btn am-btn-default"><i class="am-icon-plus"></i>添加药品信息</button>
+            </div>
+            <button type="submit" id="subInfo" class="am-btn am-btn-success am-btn-lg am-btn-block">提交</button> 
+            <input type="hidden" name="uuid" value="{{.UUID}}">
+            <footer>客服电话:0575-88137870</footer>
+        </div>
+</body>
+<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#addinput").click(function(){
+            $(".addinput").eq(0).clone().appendTo(".inputlist")
+        })
+    })
+
+</script>
+
+</html>
