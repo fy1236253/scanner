@@ -76,7 +76,7 @@
                 weui.toast('操作成功', 2000);
                 window.location.href = "/consumer?uuid=" + res.uuid
             } else {
-                if (uploadNum >= 2) {
+                if (uploadNum >= 1) {
                     weui.alert('你的图片已提交人工审核！请耐心等待');
                     weui.loading('loading').hide();
                     $(".weui-uploader__files").empty();
