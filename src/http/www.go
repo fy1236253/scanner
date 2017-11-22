@@ -40,6 +40,7 @@ func getuser(w http.ResponseWriter, r *http.Request) {
 		sess.Set("openid", "")
 	}
 	openid := sess.Get("openid").(string)
+	log.Println(openid)
 	// session 不存在
 	if openid == "" {
 		//oauth 跳转 ， 页面授权获取用户基本信息
