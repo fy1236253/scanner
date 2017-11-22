@@ -64,15 +64,16 @@
                     "uuid": uuid
                 },
                 success: function (e) {
-                    console.log(e.success)
                     if (e.success == "t") {
-                        console.log(e.result)
                         window.location.href = "/credits?score=" + e.result
                         return
                     }
-                    alert("该小票已上传，请勿重复上传!")
-                    window.location.href = "/scanner"                
-                    console.log(e)
+                    weui.toast('操作成功', {
+                        duration: 3000,
+                        callback: function () {
+                            window.location.href = "/scanner"
+                        }
+                    });
                 }
             })
         })

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"g"
 	"log"
+	"math/rand"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -135,9 +136,8 @@ func LocalImageRecognition(base64 string) *IntegralReq {
 		}
 	}
 	result.TotalFee = amount
-	// r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	// + strconv.Itoa(r.Intn(100))
-	result.OrderId = unionid
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	result.OrderId = unionid + strconv.Itoa(r.Intn(100))
 	result.Shop = shop
 	result.Medicine = drugItem
 	if shop == "" || unionid == "" || 0 == amount {
