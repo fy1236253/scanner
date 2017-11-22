@@ -65,7 +65,7 @@
                 },
                 success: function (e) {
                     if (e.success == "t") {
-                        window.location.href = "/credits?score=" + e.result
+                        window.location.href = "/credits?score=" + e.result.point
                         return
                     }
                     weui.dialog({
