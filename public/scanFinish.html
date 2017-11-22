@@ -61,13 +61,13 @@
                 url: "/save_jifen_info",
                 type: "POST",
                 data: {
-                    "uuid":uuid
+                    "uuid": uuid
                 },
                 success: function (e) {
                     console.log(e.success)
-                    if (e.success=="t"){
+                    if (e.success == "t") {
                         console.log(e.result)
-                        window.open("/credits?score="+e.result)
+                        window.location.href = "/credits?score=" + e.result
                         return
                     }
                     alert(e.error)
