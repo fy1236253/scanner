@@ -162,7 +162,6 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 	// log.Println(resp)
 	var res BATResult
 	var amountFloat, amount float64
-	var unionid, shop string
 	var orderID, unitName string
 	var topDistance int
 	result := new(IntegralReq)
@@ -200,7 +199,7 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 	result.OrderId = orderID
 	result.Shop = unitName
 	result.Medicine = drugItem
-	if shop == "" || unionid == "" || 0 == amount {
+	if unitName == "" || orderID == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
 	}
