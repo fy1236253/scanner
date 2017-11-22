@@ -55,8 +55,8 @@
                 <button id="addinput" type="button" class=" am-btn am-btn-default">
                     <i class="am-icon-plus"></i>添加药品信息</button>
             </div>
-            <a id="subInfo" class="am-btn am-btn-success am-btn-lg am-btn-block">提交</a>
-            <!-- <button type="submit" id="submit"></button> -->
+            <div id="subInfo" class="am-btn am-btn-success am-btn-lg am-btn-block">提交</div>
+            <button type="submit" id="submit"></button>
             <input type="hidden" name="uuid" value="{{.UUID}}">
             <footer>客服电话:0575-88137870</footer>
     </div>
@@ -66,12 +66,12 @@
     $(function () {
         $("#addinput").click(function () {
             $(".addinput").eq(0).clone().appendTo(".inputlist")
-            $("subInfo").click(function () {
+            $("#subInfo").click(function () {
                 weui.toast('操作成功', {
-                    // duration: 2000,
-                    // callback: function () {
-                    //     $("#submit").toggle()
-                    // }
+                    duration: 2000,
+                    callback: function () {
+                        $("#submit").toggle()
+                    }
                 });
             })
         })
