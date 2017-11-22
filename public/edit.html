@@ -64,6 +64,9 @@
     $(function () {
         $("#addinput").click(function(){
             $(".addinput").eq(0).clone().appendTo(".inputlist")
+            $("subInfo").click(function(){
+                weui.toast('操作成功', 2000);
+            })
         })
     })
 
