@@ -135,7 +135,7 @@ func LocalImageRecognition(base64 string) *IntegralReq {
 		}
 	}
 	result.TotalFee = amount
-	result.OrderId = unionid
+	result.OrderId = unionid + "1"
 	result.Shop = shop
 	result.Medicine = drugItem
 	if shop == "" || unionid == "" || 0 == amount {
