@@ -61,7 +61,7 @@
     /* 图片手动上传 */
     var uploadCustomFileList = [];
     var uploadCount = 0;
-    var uploadNum = 0;
+    var uploadNum = 0;//错误次数累计
     // 这里是简单的调用，其余api请参考文档
     weui.uploader('#uploaderCustom', {
         url: '/uploadImg',
