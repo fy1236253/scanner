@@ -71,7 +71,7 @@
             weui.toast('操作成功', {
                 duration: 2000,
                 callback: function () {
-                    $("#submit").toggle()
+                    $("#submit").trigger("click")
                 }
             });
         })
