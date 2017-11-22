@@ -15,7 +15,10 @@ import (
 
 // BATList 百度数据返回
 type BATList struct {
-	Words string `json:"words"` //目前只正则匹配汉字
+	Words    string `json:"words"` //目前只正则匹配汉字
+	Location struct {
+		Top int `json:"top"`
+	} `json:"location"`
 }
 
 // BATResult 识别的列表
@@ -91,8 +94,8 @@ func BatImageRecognition(base64Str string) string {
 	return resp
 }
 
-// LocalImageRecognition 自由图片处理 提取数据
-func LocalImageRecognition(base64 string) *IntegralReq {
+// FirstLocalImageRecognition 自由图片处理 提取数据 提取第一种小票
+func FirstLocalImageRecognition(base64 string) *IntegralReq {
 	t := time.Now()
 	resp := BatImageRecognition(base64)
 	log.Printf("bat time:%v", time.Since(t))
@@ -145,6 +148,75 @@ func LocalImageRecognition(base64 string) *IntegralReq {
 	}
 	log.Printf("our api time:%v", time.Since(t))
 	return result
+}
+
+// SecondLocalImageRecognition 第二种小票识别
+func SecondLocalImageRecognition(base64 string) *IntegralReq {
+	t := time.Now()
+	resp := BatImageRecognition(base64)
+	log.Printf("bat time:%v", time.Since(t))
+	if resp == "" {
+		log.Println("request BAT fail")
+		return nil
+	}
+	// log.Println(resp)
+	var res BATResult
+	var amountFloat, amount float64
+	var unionid, shop string
+	var orderID, unitName string
+	var topDistance int
+	result := new(IntegralReq)
+	json.Unmarshal([]byte(resp), &res)
+	var drugName string
+	var drugItem []*MedicineList
+	for _, v := range res.WordsResult { //轮训关键字
+		order := SecondRecongnitionOrderNum(v.Words)
+		if order != "" {
+			orderID = order
+		}
+		amountFloat = recongnitionAmount(v.Words)
+		if amountFloat > amount || v.Location.Top < topDistance {
+			amount = amountFloat
+		}
+		name := recongnitionName(v.Words)
+		if name != "" {
+			unitName = name
+		}
+
+		drug := recongnitionDrug(v.Words)
+		if drug != "" {
+			//			log.Println("匹配到：" + drug)
+			drugName = SelectDrugInfo(drug)
+			if drugName != "" {
+				//				log.Println(drugName)
+				nameList := new(MedicineList)
+				nameList.Name = drugName
+				drugItem = append(drugItem, nameList)
+			}
+		}
+	}
+	result.TotalFee = amount
+	// r := rand.New(rand.NewSource(time.Now().UnixNano())) + strconv.Itoa(r.Intn(100))
+	result.OrderId = orderID
+	result.Shop = unitName
+	result.Medicine = drugItem
+	if shop == "" || unionid == "" || 0 == amount {
+		log.Println("order info have error")
+		return nil
+	}
+	log.Printf("our api time:%v", time.Since(t))
+	return result
+}
+
+// SecondRecongnitionOrderNum 第二种识别
+func SecondRecongnitionOrderNum(str string) string { //加上单据号搜索
+	regular := `[^\d]+\d{7}$`
+	match, name := commonMatch(regular, str)
+	if match {
+		log.Println("单号" + name[len(name)-7:])
+		return name[len(name)-7:]
+	}
+	return ""
 }
 
 // RecongnitionOrderNum 处理订单中的编号

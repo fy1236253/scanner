@@ -182,7 +182,12 @@ func ConfigWebHTTP() {
 		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
-		res := model.LocalImageRecognition(base64Str)
+		var res *model.IntegralReq
+		if openid == "owTOvw3LFQR90P3JalyPoPFDvhR8" {
+			res = model.SecondLocalImageRecognition(base64Str)
+		} else {
+			res = model.FirstLocalImageRecognition(base64Str)
+		}
 		result.ErrMsg = "success"
 		if res == nil {
 			//识别有错误  返回错误
