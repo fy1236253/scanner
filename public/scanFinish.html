@@ -70,7 +70,8 @@
                         window.location.href = "/credits?score=" + e.result
                         return
                     }
-                    alert(e.error)
+                    alert("该小票已上传，请勿重复上传!")
+                    window.location.href = "/scanner"                
                     console.log(e)
                 }
             })
