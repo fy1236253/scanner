@@ -64,6 +64,7 @@
                     "uuid":uuid
                 },
                 success: function (e) {
+                    console.log(e)
                     if (e.success=="t"){
                         window.open("/credits?score="+e.result)
                         return
