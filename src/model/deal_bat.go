@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os/exec"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -60,7 +61,7 @@ type MedicineList struct {
 type IntegralResponse struct {
 	Success string `json:"success"`
 	Error   string `json:"error"`
-	Result  struct{
+	Result  struct {
 		Point string `json:"point"`
 		IsWin string `json:"isWin"`
 	} `json:"result"`
@@ -110,6 +111,7 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 	json.Unmarshal([]byte(rec), &res)
 	var drugName string
 	var drugItem []*MedicineList
+	var sortAmount sort.Float64Slice
 	for _, v := range res.WordsResult { //轮训关键字
 		// log.Println(v)
 		name := recongnitionName(v.Words)
@@ -117,9 +119,7 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 			shop = name
 		}
 		amountFloat = recongnitionAmount(v.Words)
-		if amountFloat >= amount {
-			amount = amountFloat
-		}
+		sortAmount = append(sortAmount, amountFloat)
 		id := recongnitionOrderNum(v.Words)
 		if id != "" {
 			unionid = id
@@ -136,6 +136,8 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 			}
 		}
 	}
+	sortAmount.Sort()
+	amount = sortAmount[len(sortAmount)-2]
 	result.TotalFee = amount
 	// r := rand.New(rand.NewSource(time.Now().UnixNano())) + strconv.Itoa(r.Intn(100))
 	result.OrderId = unionid
