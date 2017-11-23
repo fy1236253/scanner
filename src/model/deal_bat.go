@@ -177,8 +177,7 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 			orderID = order
 		}
 		amountFloat = recongnitionAmount(v.Words)
-		if amountFloat > amount || v.Location.Top < topDistance {
-			log.Println(v.Location.Top)
+		if amountFloat > amount && v.Location.Top < topDistance {
 			amount = amountFloat
 		}
 		name := recongnitionName(v.Words)
