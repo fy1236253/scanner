@@ -184,6 +184,7 @@ func ConfigWebHTTP() {
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
 		var res *model.IntegralReq
 		recongnition, types := model.BatImageRecognition(base64Str)
+		log.Println(types)
 		if types == 1 {
 			res = model.FirstLocalImageRecognition(recongnition)
 
