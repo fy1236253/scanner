@@ -92,7 +92,7 @@ func BatImageRecognition(base64Str string) (string, int) {
 		log.Println(err)
 		return "", 0
 	}
-	log.Println(resp)
+	// log.Println(resp)
 	types := RecongnitionType(resp)
 	log.Println(types)
 	return resp, types
@@ -146,20 +146,19 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 }
 
 // RecongnitionType 判断小票的类型
-func RecongnitionType(str string) int {
+func RecongnitionType(str string) (types int) {
 	var res BATResult
 	json.Unmarshal([]byte(str), &res)
 	regular := `^(姓名|人员性质|收款人)`
 	for _, v := range res.WordsResult {
-		log.Println(v)
 		match, _ := commonMatch(regular, v.Words)
 		if match {
-			return 2
+			types = 2
 		} else {
-			return 1
+			types = 1
 		}
 	}
-	return 0
+	return types
 }
 
 // SecondLocalImageRecognition 第二种小票识别
