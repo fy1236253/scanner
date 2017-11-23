@@ -47,7 +47,7 @@ func getuser(w http.ResponseWriter, r *http.Request) {
 		code := queryValues.Get("code") //  摇一摇入口 code 有效
 		state := queryValues.Get("state")
 		if code == "" && state == "" {
-			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_base&state=1#wechat_redirect"
 			log.Println("http.Redirect", addr)
 			http.Redirect(w, r, addr, 302)
 			return
