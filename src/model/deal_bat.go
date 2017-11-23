@@ -154,8 +154,6 @@ func RecongnitionType(str string) (types int) {
 		match, _ := commonMatch(regular, v.Words)
 		if match {
 			types = 2
-		} else {
-			types = 1
 		}
 	}
 	return types

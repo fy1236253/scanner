@@ -185,12 +185,11 @@ func ConfigWebHTTP() {
 		var res *model.IntegralReq
 		recongnition, types := model.BatImageRecognition(base64Str)
 		log.Println(types)
-		if types == 1 {
-			res = model.FirstLocalImageRecognition(recongnition)
 
-		} else if types == 2 {
+		if types == 2 {
 			res = model.SecondLocalImageRecognition(recongnition)
-
+		} else {
+			res = model.FirstLocalImageRecognition(recongnition)
 		}
 		result.ErrMsg = "success"
 		if res == nil {
