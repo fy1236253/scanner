@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"g"
 	"log"
-	"math/rand"
 	"os/exec"
 	"regexp"
 	"sort"
@@ -204,8 +203,8 @@ func SecondLocalImageRecognition(rec string) *IntegralReq {
 		}
 	}
 	result.TotalFee = amount
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	result.OrderId = orderID + strconv.Itoa(r.Intn(100))
+	// r := rand.New(rand.NewSource(time.Now().UnixNano()))  + strconv.Itoa(r.Intn(100))
+	result.OrderId = orderID
 	result.Shop = unitName
 	result.Medicine = drugItem
 	log.Println(unitName)

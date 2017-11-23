@@ -121,7 +121,7 @@
         },
         onBeforeSend: function (data, headers) {
             // console.log(this, data, headers);
-            $.extend(data, { "rate": uploadNum })
+            $.extend(data, { "rate": uploadNum })//添加错误参数信息
         }
     });
 
