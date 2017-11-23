@@ -60,7 +60,10 @@ type MedicineList struct {
 type IntegralResponse struct {
 	Success string `json:"success"`
 	Error   string `json:"error"`
-	Result  string `json:"result"`
+	Result  struct{
+		Point string `json:"point"`
+		IsWin string `json:"isWin"`
+	} `json:"result"`
 }
 
 // GetIntegral 积分请求
