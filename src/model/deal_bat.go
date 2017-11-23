@@ -274,7 +274,7 @@ func SelectDrugInfo(str string) string {
 
 // recongnitionName 匹配订单中的药店名称
 func recongnitionName(str string) string {
-	regular := `.*.(大药房)|.*.(连锁店)`
+	regular := `.*.(大药房)|.*.(连锁店|连锁)`
 	match, name := commonMatch(regular, str)
 	name = strings.Replace(name, "落款单位:", "", -1)
 	if match {

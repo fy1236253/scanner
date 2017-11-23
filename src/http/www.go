@@ -164,7 +164,7 @@ func ConfigWebHTTP() {
 		log.Println(rate)
 		rateInt, _ := strconv.Atoi(rate)
 		var result model.CommonResult
-		if rateInt >= 1 {
+		if rateInt > 1 {
 			//人工处理模块
 			log.Println("save handle img:" + uuid)
 			f, _ := os.Create("public/upload/" + uuid + ".jpg")
