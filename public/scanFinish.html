@@ -65,6 +65,7 @@
                 },
                 success: function (e) {
                     if (e.success == "t") {
+                        console.log(e)
                         window.location.href = "/credits?score=" + e.result.point
                         return
                     }

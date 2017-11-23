@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"g"
 	"log"
+	"math/rand"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -195,10 +196,13 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 		}
 	}
 	result.TotalFee = amount
-	// r := rand.New(rand.NewSource(time.Now().UnixNano())) + strconv.Itoa(r.Intn(100))
-	result.OrderId = orderID
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	result.OrderId = orderID + strconv.Itoa(r.Intn(100))
 	result.Shop = unitName
 	result.Medicine = drugItem
+	log.Println(unitName)
+	log.Println(orderID)
+	log.Println(amount)
 	if unitName == "" || orderID == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
@@ -212,7 +216,7 @@ func SecondRecongnitionOrderNum(str string) string { //加上单据号搜索
 	regular := `[^\d]+\d{7}$`
 	match, name := commonMatch(regular, str)
 	if match {
-		log.Println("单号" + name[len(name)-7:])
+		// log.Println("单号" + name[len(name)-7:])
 		return name[len(name)-7:]
 	}
 	return ""
