@@ -147,7 +147,7 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 func RecongnitionType(str string) int {
 	var res BATResult
 	json.Unmarshal([]byte(str), &res)
-	regular := `^[姓名|人员性质|收款人]`
+	regular := `^(姓名|人员性质|收款人)`
 	for _, v := range res.WordsResult {
 		match, _ := commonMatch(regular, v.Words)
 		if match {
