@@ -92,6 +92,7 @@ func BatImageRecognition(base64Str string) (string, int) {
 		log.Println(err)
 		return "", 0
 	}
+	log.Println(resp)
 	types := RecongnitionType(resp)
 	log.Println(types)
 	return resp, types
