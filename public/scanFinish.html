@@ -64,11 +64,8 @@
                     "uuid": uuid
                 },
                 success: function (e) {
-                    console.log(e)
-                    console.log(e.result.point)
-                    console.log(e.result)
                     if (e.success == "t") {
-                        // window.location.href = "/credits?score=" + e.result.point
+                        window.location.href = "/credits?score=" + e.result.point
                         return
                     }
                     weui.dialog({
