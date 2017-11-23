@@ -81,7 +81,7 @@ func GetIntegral(pkg *IntegralReq) (response *IntegralResponse) {
 }
 
 // BatImageRecognition 百度的图像识别接口
-func BatImageRecognition(base64Str string) string {
+func BatImageRecognition(base64Str string) (string, int) {
 	url := "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate?access_token=24.1f248484d5b7faf54537dfae92fed52c.2592000.1512598910.282335-10330945"
 	req := httplib.Post(url).SetTimeout(3*time.Second, 1*time.Minute)
 	req.Header("Content-Type", "application/x-www-form-urlencoded")
@@ -90,26 +90,19 @@ func BatImageRecognition(base64Str string) string {
 	resp, err := req.String()
 	if err != nil {
 		log.Println(err)
-		return ""
+		return "", 0
 	}
-	return resp
+	types := RecongnitionType(resp)
+	return resp, types
 }
 
 // FirstLocalImageRecognition 自由图片处理 提取数据 提取第一种小票
-func FirstLocalImageRecognition(base64 string) *IntegralReq {
-	t := time.Now()
-	resp := BatImageRecognition(base64)
-	log.Printf("bat time:%v", time.Since(t))
-	if resp == "" {
-		log.Println("request BAT fail")
-		return nil
-	}
-	// log.Println(resp)
+func FirstLocalImageRecognition(rec string) *IntegralReq {
 	var res BATResult
 	var amountFloat, amount float64
 	var unionid, shop string
 	result := new(IntegralReq)
-	json.Unmarshal([]byte(resp), &res)
+	json.Unmarshal([]byte(rec), &res)
 	var drugName string
 	var drugItem []*MedicineList
 	for _, v := range res.WordsResult { //轮训关键字
@@ -147,26 +140,34 @@ func FirstLocalImageRecognition(base64 string) *IntegralReq {
 		log.Println("order info have error")
 		return nil
 	}
-	log.Printf("our api time:%v", time.Since(t))
 	return result
 }
 
-// SecondLocalImageRecognition 第二种小票识别
-func SecondLocalImageRecognition(base64 string) *IntegralReq {
-	t := time.Now()
-	resp := BatImageRecognition(base64)
-	log.Printf("bat time:%v", time.Since(t))
-	if resp == "" {
-		log.Println("request BAT fail")
-		return nil
+// RecongnitionType 判断小票的类型
+func RecongnitionType(str string) int {
+	var res BATResult
+	json.Unmarshal([]byte(str), &res)
+	regular := `姓名|人员性质|收款人`
+	for _, v := range res.WordsResult {
+		match, _ := commonMatch(regular, v.Words)
+		if match {
+			return 2
+		} else {
+			return 1
+		}
 	}
-	// log.Println(resp)
+	return 0
+}
+
+// SecondLocalImageRecognition 第二种小票识别
+func SecondLocalImageRecognition(rec string) *IntegralReq {
+	t := time.Now()
 	var res BATResult
 	var amountFloat, amount float64
 	var orderID, unitName string
 	var topDistance int
 	result := new(IntegralReq)
-	json.Unmarshal([]byte(resp), &res)
+	json.Unmarshal([]byte(rec), &res)
 	topDistance = SecondMidStr(res)
 	log.Println(topDistance)
 	var drugName string

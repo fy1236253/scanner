@@ -183,10 +183,13 @@ func ConfigWebHTTP() {
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
 		var res *model.IntegralReq
-		if openid == "owTOvw3LFQR90P3JalyPoPFDvhR8" {
-			res = model.SecondLocalImageRecognition(base64Str)
-		} else {
-			res = model.FirstLocalImageRecognition(base64Str)
+		recongnition, types := model.BatImageRecognition(base64Str)
+		if types == 1 {
+			res = model.FirstLocalImageRecognition(recongnition)
+
+		} else if types == 2 {
+			res = model.SecondLocalImageRecognition(recongnition)
+
 		}
 		result.ErrMsg = "success"
 		if res == nil {
