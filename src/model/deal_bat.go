@@ -150,6 +150,7 @@ func RecongnitionType(str string) int {
 	json.Unmarshal([]byte(str), &res)
 	regular := `^(姓名|人员性质|收款人)`
 	for _, v := range res.WordsResult {
+		log.Println(v)
 		match, _ := commonMatch(regular, v.Words)
 		if match {
 			return 2
