@@ -167,6 +167,7 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 	var topDistance int
 	result := new(IntegralReq)
 	json.Unmarshal([]byte(resp), &res)
+	topDistance = SecondMidStr(res)
 	var drugName string
 	var drugItem []*MedicineList
 	for _, v := range res.WordsResult { //轮训关键字
@@ -220,6 +221,18 @@ func SecondRecongnitionOrderNum(str string) string { //加上单据号搜索
 		return name[len(name)-7:]
 	}
 	return ""
+}
+
+// SecondMidStr 第二种小票查询中间字符位置
+func SecondMidStr(result BATResult) int {
+	regular := `.*.(费用分类)|医保费用分类`
+	for _, v := range result.WordsResult {
+		match, _ := commonMatch(regular, v.Words)
+		if match {
+			return v.Location.Top
+		}
+	}
+	return 0
 }
 
 // RecongnitionOrderNum 处理订单中的编号
