@@ -168,6 +168,7 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 	result := new(IntegralReq)
 	json.Unmarshal([]byte(resp), &res)
 	topDistance = SecondMidStr(res)
+	log.Println(topDistance)
 	var drugName string
 	var drugItem []*MedicineList
 	for _, v := range res.WordsResult { //轮训关键字
@@ -177,6 +178,7 @@ func SecondLocalImageRecognition(base64 string) *IntegralReq {
 		}
 		amountFloat = recongnitionAmount(v.Words)
 		if amountFloat > amount || v.Location.Top < topDistance {
+			log.Println(v.Location.Top)
 			amount = amountFloat
 		}
 		name := recongnitionName(v.Words)
