@@ -136,7 +136,13 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 		}
 	}
 	sortAmount.Sort()
-	amount = sortAmount[len(sortAmount)-2]
+	if len(sortAmount) < 2 && len(sortAmount) >= 1 {
+		amount = sortAmount[len(sortAmount)-1]
+	} else if len(sortAmount) >= 2 {
+		amount = sortAmount[len(sortAmount)-2]
+	} else {
+		amount = 0
+	}
 	result.TotalFee = amount
 	// r := rand.New(rand.NewSource(time.Now().UnixNano())) + strconv.Itoa(r.Intn(100))
 	result.OrderId = unionid
