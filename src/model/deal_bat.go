@@ -68,7 +68,7 @@ type IntegralResponse struct {
 
 // GetIntegral 积分请求
 func GetIntegral(pkg *IntegralReq) (response *IntegralResponse) {
-	url := "http://101.200.187.60:8180/members/servlet/ACSClientHttp"
+	url := "http://5mxpharmacy.com/textshop/members/servlet/ACSClientHttp"
 	req := httplib.Post(url)
 	req.Param("methodName", "getReceipt")
 	req.Param("beanName", "appuserinfohttpservice")
