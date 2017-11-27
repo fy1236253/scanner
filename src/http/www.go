@@ -68,15 +68,12 @@ func ConfigWebHTTP() {
 	// 用户上传图片
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
-		openid := r.FormValue("openid")
-		if openid == "" {
-			log.Println("openid 为空")
-			return
-		}
-		// getuser(w, r)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
-		sess.Set("openid", openid)
+		user := r.FormValue("openid")
+		if sess.Get("openid") == nil {
+			sess.Set("openid", user)
+		}
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "index.html")
 		if !file.IsExist(f) {
