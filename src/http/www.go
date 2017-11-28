@@ -298,4 +298,8 @@ func ConfigWebHTTP() {
 		model.ImportDatbase()
 		return
 	})
+	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+		RenderJson(w, "test text")
+		return
+	})
 }
