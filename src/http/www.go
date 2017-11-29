@@ -264,14 +264,14 @@ func ConfigWebHTTP() {
 		if r.Method == "POST" {
 			log.Println(r.Form)
 			var p model.IntegralReq
-			// var m model.MedicineList
+			var m model.MedicineList
 			uuid := r.FormValue("uuid")
 			openid := model.GetOpenidByUID(uuid)
 			amount := r.FormValue("amount")
 			log.Println(openid)
-			drugArr := r.Form["drug[]"] //药品名称
-			// drugCount := r.Form["count[]"] //药品数量
-			// drugPrice := r.Form["price[]"] //药品价格
+			drugArr := r.Form["drug[]"]    //药品名称
+			drugCount := r.Form["count[]"] //药品数量
+			drugPrice := r.Form["price[]"] //药品价格
 			p.Openid = openid
 			p.Shop = r.FormValue("name")
 			p.OrderId = r.FormValue("order")
@@ -279,10 +279,10 @@ func ConfigWebHTTP() {
 			p.Times = time.Now().Unix()
 			for k, v := range drugArr {
 				log.Println(k, v)
-				// m.Name = v
-				// m.Amount, _ = strconv.Atoi(drugCount[k-1])
-				// m.Money, _ = strconv.ParseFloat(drugPrice[k-1], 64)
-				// p.Medicine = append(p.Medicine, &m)
+				m.Name = v
+				m.Amount, _ = strconv.Atoi(drugCount[k])
+				m.Money, _ = strconv.ParseFloat(drugPrice[k], 64)
+				p.Medicine = append(p.Medicine, &m)
 			}
 			log.Println(p)
 			result := model.GetIntegral(&p)
