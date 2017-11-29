@@ -67,15 +67,10 @@
             $(".addinput").eq(0).clone().appendTo(".inputlist")
         })
         $("#subInfo").click(function () {
-            // weui.toast('操作成功', {
-            //     duration: 1000,
-            //     callback: function () {
-            //         // $("#submit").trigger("click")
-            //     }
-            // });
+
             var d = {};
             var t = $('form').serializeArray();
-            var arrName=[], arrCount=[], arrAmount =[];
+            var arrName = [], arrCount = [], arrAmount = [];
             $.each(t, function () {
                 if (this.name == "drug") {
                     arrName.push(this.value)
@@ -93,8 +88,27 @@
             d["drug"] = arrName
             d["price"] = arrAmount
             d["count"] = arrCount
-            $.post("/edit_img",d,function(e){
+            $.post("/edit_img", d, function (e) {
                 console.log(e)
+                if (e.success == "t") {
+                    weui.toast('操作成功', {
+                        duration: 1000,
+                        callback: function () {
+                            window.location.href = "/hand_operation"
+                        }
+                    });
+                }else{
+                    weui.dialog({
+                        title: '上传结果',
+                        content: e.error,
+                        buttons: [{
+                            label: '确定',
+                            type: 'primary',
+                            onClick: function () {
+                            }
+                        }]
+                    });
+                }
             })
             console.log(d)
             console.log(JSON.stringify(d));
