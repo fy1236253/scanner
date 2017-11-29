@@ -64,6 +64,26 @@ func DeleteUploadImg(uuid string) error {
 	return err
 }
 
+// GetOpenidByUID 成功提交后删除记录
+func GetOpenidByUID(uuid string) (openid string) {
+	conn, _ := g.GetDBConn("default")
+	var rows *sql.Rows
+	var err error
+	rows, err = conn.Query("select openid from manual_order where uuid=? ", uuid)
+	defer rows.Close()
+	for rows.Next() {
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		if e := rows.Scan(&openid); e != nil {
+			log.Println("[ERROR] get row fail", e)
+			return
+		}
+	}
+	return openid
+}
+
 type ImgUuid struct {
 	UUID string `json:"uuid"`
 }

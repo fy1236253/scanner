@@ -263,17 +263,31 @@ func ConfigWebHTTP() {
 		r.ParseForm()
 		if r.Method == "POST" {
 			log.Println(r.Form)
+			var p *model.IntegralReq
+			var m *model.MedicineList
 			uuid := r.FormValue("uuid")
-			// amount := r.FormValue("amount")
-			// name := r.FormValue("name")
-			// order := r.FormValue("order")
-			// drug := r.FormValue("drug")
-			log.Println(r.Form["drug"])
-			if uuid == "" {
-				return
+			openid := model.GetOpenidByUID(uuid)
+			amount := r.FormValue("amount")
+			drugArr := r.Form["drug"]    //药品名称
+			drugCount := r.Form["count"] //药品数量
+			drugPrice := r.Form["price"] //药品价格
+			p.Openid = openid
+			p.Shop = r.FormValue("name")
+			p.OrderId = r.FormValue("order")
+			p.TotalFee, _ = strconv.ParseFloat(amount, 64)
+			p.Times = time.Now().Unix()
+			for k, v := range drugArr {
+				m.Name = v
+				m.Amount, _ = strconv.Atoi(drugCount[k])
+				m.Money, _ = strconv.ParseFloat(drugPrice[k], 64)
+				p.Medicine = append(p.Medicine, m)
 			}
-			model.DeleteUploadImg(uuid)
-			http.Redirect(w, r, "/hand_operation", 302)
+			log.Println(p)
+			result := model.GetIntegral(p)
+			if result.Success == "t" {
+				model.DeleteUploadImg(uuid)
+			}
+			RenderJson(w, result)
 			return
 		}
 		urlParse, _ := url.ParseQuery(r.URL.RawQuery)

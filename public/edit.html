@@ -26,7 +26,7 @@
         <div class="am-u-lg-12 am-u-sm-12 am-u-md-12">
             <img src="upload/{{.UUID}}.jpg" class="mtop20 am-img-responsive" alt="Image">
         </div>
-        <form role="form" id="from" action="/edit_img" method="POST">
+        <form role="form" id="from">
             <div class="am-form-group">
                 <input type="number" name="order" class="am-form-field" placeholder="订单编号" required>
             </div>
@@ -56,7 +56,6 @@
                     <i class="am-icon-plus"></i>添加药品信息</button>
             </div>
             <div id="subInfo" class="am-btn am-btn-success am-btn-lg am-btn-block">提交</div>
-            <button type="submit" id="submit"></button>
             <input type="hidden" name="uuid" value="{{.UUID}}">
             <footer>客服电话:0575-88137870</footer>
     </div>
@@ -68,12 +67,37 @@
             $(".addinput").eq(0).clone().appendTo(".inputlist")
         })
         $("#subInfo").click(function () {
-            weui.toast('操作成功', {
-                duration: 1000,
-                callback: function () {
-                    $("#submit").trigger("click")
+            // weui.toast('操作成功', {
+            //     duration: 1000,
+            //     callback: function () {
+            //         // $("#submit").trigger("click")
+            //     }
+            // });
+            var d = {};
+            var t = $('form').serializeArray();
+            var arrName=[], arrCount=[], arrAmount =[];
+            $.each(t, function () {
+                if (this.name == "drug") {
+                    arrName.push(this.value)
+                    return
+                } else if (this.name == "count") {
+                    arrCount.push(this.value)
+                    return
+                } else if (this.name == "price") {
+                    arrAmount.push(this.value)
+                    return
                 }
+                d[this.name] = this.value;
+
             });
+            d["drug"] = arrName
+            d["pirce"] = arrAmount
+            d["count"] = arrCount
+            $.post("/edit_img",d,function(e){
+                console.log(e)
+            })
+            console.log(d)
+            console.log(JSON.stringify(d));
         })
     })
 </script>
