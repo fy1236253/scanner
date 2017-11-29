@@ -277,9 +277,8 @@ func ConfigWebHTTP() {
 			p.OrderId = r.FormValue("order")
 			p.TotalFee, _ = strconv.ParseFloat(amount, 64)
 			p.Times = time.Now().Unix()
-			// log.Println(drugCount, drugPrice)
+			log.Println(drugCount, drugPrice)
 			for k, v := range drugArr {
-				// log.Println(k, v)
 				m.Name = v
 				m.Amount, _ = strconv.Atoi(drugCount[k])
 				m.Money, _ = strconv.ParseFloat(drugPrice[k], 64)
