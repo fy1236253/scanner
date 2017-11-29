@@ -279,8 +279,8 @@ func ConfigWebHTTP() {
 			p.Times = time.Now().Unix()
 			for k, v := range drugArr {
 				m.Name = v
-				m.Amount, _ = strconv.Atoi(drugCount[k])
-				m.Money, _ = strconv.ParseFloat(drugPrice[k], 64)
+				m.Amount, _ = strconv.Atoi(drugCount[k-1])
+				m.Money, _ = strconv.ParseFloat(drugPrice[k-1], 64)
 				p.Medicine = append(p.Medicine, &m)
 			}
 			log.Println(p)
