@@ -277,6 +277,7 @@ func ConfigWebHTTP() {
 			p.OrderId = r.FormValue("order")
 			p.TotalFee, _ = strconv.ParseFloat(amount, 64)
 			p.Times = time.Now().Unix()
+			log.Println(drugCount, drugPrice)
 			for k, v := range drugArr {
 				log.Println(k, v)
 				m.Name = v
