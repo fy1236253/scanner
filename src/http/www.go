@@ -264,7 +264,7 @@ func ConfigWebHTTP() {
 		if r.Method == "POST" {
 			log.Println(r.Form)
 			var p model.IntegralReq
-			var m *model.MedicineList
+			var m model.MedicineList
 			uuid := r.FormValue("uuid")
 			openid := model.GetOpenidByUID(uuid)
 			amount := r.FormValue("amount")
@@ -281,7 +281,7 @@ func ConfigWebHTTP() {
 				m.Name = v
 				m.Amount, _ = strconv.Atoi(drugCount[k])
 				m.Money, _ = strconv.ParseFloat(drugPrice[k], 64)
-				p.Medicine = append(p.Medicine, m)
+				p.Medicine = append(p.Medicine, &m)
 			}
 			log.Println(p)
 			result := model.GetIntegral(&p)
