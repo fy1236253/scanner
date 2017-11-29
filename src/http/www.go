@@ -267,8 +267,8 @@ func ConfigWebHTTP() {
 			// amount := r.FormValue("amount")
 			// name := r.FormValue("name")
 			// order := r.FormValue("order")
-			drug := r.FormValue("drug")
-			log.Println(drug)
+			// drug := r.FormValue("drug")
+			log.Println(r.Form["drug"])
 			if uuid == "" {
 				return
 			}
