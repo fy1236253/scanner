@@ -263,7 +263,7 @@ func ConfigWebHTTP() {
 		r.ParseForm()
 		if r.Method == "POST" {
 			log.Println(r.Form)
-			var p *model.IntegralReq
+			var p model.IntegralReq
 			var m *model.MedicineList
 			uuid := r.FormValue("uuid")
 			openid := model.GetOpenidByUID(uuid)
@@ -284,7 +284,7 @@ func ConfigWebHTTP() {
 				p.Medicine = append(p.Medicine, m)
 			}
 			log.Println(p)
-			result := model.GetIntegral(p)
+			result := model.GetIntegral(&p)
 			if result.Success == "t" {
 				model.DeleteUploadImg(uuid)
 			}
