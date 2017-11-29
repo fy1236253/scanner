@@ -264,6 +264,11 @@ func ConfigWebHTTP() {
 		if r.Method == "POST" {
 			log.Println(r.Form)
 			uuid := r.FormValue("uuid")
+			// amount := r.FormValue("amount")
+			// name := r.FormValue("name")
+			// order := r.FormValue("order")
+			drug := r.FormValue("drug")
+			log.Println(drug)
 			if uuid == "" {
 				return
 			}

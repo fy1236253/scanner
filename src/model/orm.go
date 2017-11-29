@@ -83,7 +83,7 @@ func GetUploadImgInfo() (arr []string) {
 		if e := rows.Scan(&uuid); e != nil {
 			log.Println("[ERROR] get row fail", e)
 		} else {
-			log.Println(uuid)
+			// log.Println(uuid)
 			arr = append(arr, uuid) // 保存id 集合
 		}
 	}
