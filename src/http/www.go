@@ -268,6 +268,7 @@ func ConfigWebHTTP() {
 			uuid := r.FormValue("uuid")
 			openid := model.GetOpenidByUID(uuid)
 			amount := r.FormValue("amount")
+			log.Println(openid)
 			drugArr := r.Form["drug"]    //药品名称
 			drugCount := r.Form["count"] //药品数量
 			drugPrice := r.Form["price"] //药品价格
