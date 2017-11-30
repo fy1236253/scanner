@@ -21,9 +21,9 @@ func main() {
 	}
 	g.ParseConfig(*cfg) //配置文件
 	g.ParseDrugConfig()
-	g.InitDB()      //db池
-	g.InitRootDir() //全局参数
-
+	g.InitDB()         //db池
+	g.InitRootDir()    //全局参数
+	g.TokenCacheInit() //token缓存
 	logTo := g.Config().Logs
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
