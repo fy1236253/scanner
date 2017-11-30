@@ -32,6 +32,10 @@ func AccessTokenRequest() (token string) {
 	return
 }
 
+func StartToken() {
+	go TokenCacheInit()
+}
+
 //TokenCacheInit 缓存token
 func TokenCacheInit() {
 	for {
