@@ -71,12 +71,12 @@ func ConfigWebHTTP() {
 	// 用户上传图片
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
-		fullurl := "http://" + r.Host + r.RequestURI
+		// fullurl := "http://" + r.Host + r.RequestURI
 		wxid := g.Config().Wechats[0].WxID
 		appid := g.Config().Wechats[0].AppID
 		nonce := strconv.Itoa(rand.Intn(999999999))
-		ts := time.Now().Unix()
-		sign := util.WXConfigSign(g.GetJsAPITicket(), nonce, strconv.FormatInt(ts, 10), fullurl)
+		// ts := time.Now().Unix()
+		// sign := util.WXConfigSign(g.GetJsAPITicket(), nonce, strconv.FormatInt(ts, 10), fullurl)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		user := r.FormValue("openid")
@@ -100,7 +100,7 @@ func ConfigWebHTTP() {
 			WxID:  wxid,
 			AppID: appid,
 			Nonce: nonce,
-			Sign:  sign,
+			// Sign:  sign,
 		}
 		t, err := template.ParseFiles(f)
 		err = t.Execute(w, data)
