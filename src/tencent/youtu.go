@@ -74,7 +74,7 @@ type YTRequest struct {
 }
 
 // YoutuRequest 发起请求
-func YoutuRequest() (res string) {
+func YoutuRequest(img string) (res string, types int) {
 	appID := "10109960"
 	secretID := "AKIDAB3mKhQlU1LTZRGScaJm25XlpfKbfgPu"
 	secretKey := "TihRyKn6C3f3JL8g04zgCUaR4RZZM4Zq"
@@ -84,11 +84,12 @@ func YoutuRequest() (res string) {
 	sign := as.YTSign()
 	b := YTRequest{}
 	b.Appid = appID
-	b.Image = ImageBase64()
+	b.Image = img
 	data, _ := json.Marshal(b)
 	resp, _ := YouTuGet(sign, url, string(data))
-	log.Println(string(resp))
-	return string(resp)
+	res = string(resp)
+	types = RecongnitionType(string(resp))
+	return
 }
 
 // ImageBase64 图片base64编码

@@ -6,6 +6,7 @@ import (
 	"g"
 	"html/template"
 	"io"
+	"io/ioutil"
 	"log"
 	"model"
 	"net/http"
@@ -13,6 +14,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"tencent"
 	"time"
 	"util"
 
@@ -165,8 +167,8 @@ func ConfigWebHTTP() {
 		}
 		openid := sess.Get("openid").(string)
 		uuid := model.CreateNewID(12)
-		file, _, _ := r.FormFile("img")
-		defer file.Close()
+		f, _, _ := r.FormFile("img")
+		defer f.Close()
 		rate := r.FormValue("rate")
 		log.Println(rate)
 		rateInt, _ := strconv.Atoi(rate)
@@ -174,29 +176,27 @@ func ConfigWebHTTP() {
 		if rateInt > 1 {
 			//人工处理模块
 			log.Println("save handle img:" + uuid)
-			f, _ := os.Create("public/upload/" + uuid + ".jpg")
+			fs, _ := os.Create("public/upload/" + uuid + ".jpg")
 			defer f.Close()
-			io.Copy(f, file)
+			io.Copy(fs, f)
 			model.CreatNewUploadImg(uuid, openid)
 			result.ErrMsg = "1" //表示有错误
 			RenderJson(w, result)
 			return
 		}
-		if file == nil || openid == "" {
+		if f == nil || openid == "" {
 			log.Println("未检测到文件")
 			return
 		}
-		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
-		n, _ := file.Read(sourcebuffer)
-		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
-		var res *model.IntegralReq
-		recongnition, types := model.BatImageRecognition(base64Str)
+		imgByte, _ := ioutil.ReadAll(f)
+		base64Str := base64.StdEncoding.EncodeToString(imgByte)
+		var res *tencent.IntegralReq
+		recongnition, types := tencent.YoutuRequest(base64Str)
 		log.Println(types)
-
 		if types == 2 {
-			res = model.SecondLocalImageRecognition(recongnition)
+			res = tencent.TicketHandle(recongnition)
 		} else {
-			res = model.FirstLocalImageRecognition(recongnition)
+			res = tencent.TicketHandleSecond(recongnition)
 		}
 		result.ErrMsg = "success"
 		if res == nil {

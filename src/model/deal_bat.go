@@ -125,10 +125,9 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 		}
 		drug := recongnitionDrug(v.Words)
 		if drug != "" {
-			//			log.Println("匹配到：" + drug)
 			drugName = SelectDrugInfo(drug)
 			if drugName != "" {
-				//				log.Println(drugName)
+				log.Println(drugName)
 				nameList := new(MedicineList)
 				nameList.Name = drugName
 				drugItem = append(drugItem, nameList)
@@ -150,11 +149,6 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 	result.Medicine = drugItem
 	log.Println(unionid)
 	log.Println(shop)
-	if len(drugItem) > 0 {
-		for _, drugs := range drugItem {
-			log.Println(drugs)
-		}
-	}
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
@@ -208,7 +202,7 @@ func SecondLocalImageRecognition(rec string) *IntegralReq {
 			//			log.Println("匹配到：" + drug)
 			drugName = SelectDrugInfo(drug)
 			if drugName != "" {
-				//				log.Println(drugName)
+				log.Println(drugName)
 				nameList := new(MedicineList)
 				nameList.Name = drugName
 				drugItem = append(drugItem, nameList)
