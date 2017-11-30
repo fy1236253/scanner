@@ -252,7 +252,7 @@ func SecondMidStr(result BATResult) int {
 
 // RecongnitionOrderNum 处理订单中的编号
 func recongnitionOrderNum(str string) string { //加上单据号搜索
-	regular := `^(单据号|单据).\d[0-9]+|\d{15}`
+	regular := `^(单据号|单据).*.\d+|\d{15}`
 	match, name := commonMatch(regular, str)
 	reg := regexp.MustCompile("[\u4E00-\u9FA5].")
 	name = reg.ReplaceAllLiteralString(name, "")
