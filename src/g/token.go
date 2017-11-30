@@ -1,7 +1,6 @@
 package g
 
 import (
-	"log"
 	"sync"
 	"time"
 	"util"
@@ -39,13 +38,12 @@ func StartToken() {
 //TokenCacheInit 缓存token
 func TokenCacheInit() {
 	for {
-		if Expires == 0 {
+		if Expires <= 0 {
 			Token = AccessTokenRequest()
 			SetJsAPITicket()
 			Expires = int(7000)
 		} else {
-			log.Println(Expires)
-			time.Sleep(10 * time.Second)
+			time.Sleep(1 * time.Second)
 			Expires--
 		}
 	}
