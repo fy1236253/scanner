@@ -150,7 +150,11 @@ func FirstLocalImageRecognition(rec string) *IntegralReq {
 	result.Medicine = drugItem
 	log.Println(unionid)
 	log.Println(shop)
-	log.Println(drugItem)
+	if len(drugItem) > 0 {
+		for _, drugs := range drugItem {
+			log.Println(drugs)
+		}
+	}
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
