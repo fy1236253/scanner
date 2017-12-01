@@ -38,7 +38,6 @@ func (as *AppSign) orignalSign() string {
 		now,
 		nonce,
 		as.userID)
-	log.Println(sign)
 	return sign
 }
 
@@ -51,7 +50,6 @@ func (as *AppSign) YTSign() string {
 	//attach orig_sign to hm
 	dstSign := []byte(string(hm) + origSign)
 	b64 := base64.StdEncoding.EncodeToString(dstSign)
-	log.Println(b64)
 	return b64
 }
 
