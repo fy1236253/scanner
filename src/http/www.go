@@ -75,7 +75,7 @@ func ConfigWebHTTP() {
 		wxid := g.Config().Wechats[0].WxID
 		appid := g.Config().Wechats[0].AppID
 		nonce := strconv.Itoa(rand.Intn(999999999))
-		// ts := time.Now().Unix()
+		ts := time.Now().Unix()
 		// sign := util.WXConfigSign(g.GetJsAPITicket(), nonce, strconv.FormatInt(ts, 10), fullurl)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
@@ -96,11 +96,13 @@ func ConfigWebHTTP() {
 			AppID string
 			Nonce string
 			Sign  string
+			Ts    int64
 		}{
 			WxID:  wxid,
 			AppID: appid,
 			Nonce: nonce,
 			// Sign:  sign,
+			Ts:    ts,
 		}
 		t, err := template.ParseFiles(f)
 		err = t.Execute(w, data)
@@ -109,6 +111,49 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+		// 用户上传图片
+		http.HandleFunc("/testimg", func(w http.ResponseWriter, r *http.Request) {
+			r.ParseForm()
+			fullurl := "http://" + r.Host + r.RequestURI
+			wxid := g.Config().Wechats[0].WxID
+			appid := g.Config().Wechats[0].AppID
+			nonce := strconv.Itoa(rand.Intn(999999999))
+			ts := time.Now().Unix()
+			sign := util.WXConfigSign(g.GetJsAPITicket(), nonce, strconv.FormatInt(ts, 10), fullurl)
+			sess, _ := globalSessions.SessionStart(w, r)
+			defer sess.SessionRelease(w)
+			user := r.FormValue("openid")
+			log.Println(user)
+			if sess.Get("openid") == nil {
+				sess.Set("openid", user)
+			}
+			var f string // 模板文件路径
+			f = filepath.Join(g.Root, "/public", "index.html")
+			if !file.IsExist(f) {
+				log.Println("not find", f)
+				http.NotFound(w, r)
+				return
+			}
+			data := struct {
+				WxID  string
+				AppID string
+				Nonce string
+				Sign  string
+				Ts    int64
+			}{
+				WxID:  wxid,
+				AppID: appid,
+				Nonce: nonce,
+				Sign:  sign,
+				Ts:    ts,
+			}
+			t, err := template.ParseFiles(f)
+			err = t.Execute(w, data)
+			if err != nil {
+				log.Println(err)
+			}
+			return
+		})
 
 	// 上传图片后  返回识别结果
 	http.HandleFunc("/consumer", func(w http.ResponseWriter, r *http.Request) {

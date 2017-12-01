@@ -52,6 +52,7 @@ func TokenCacheInit() {
 // SetJsAPITicket ticket设置
 func SetJsAPITicket() {
 	JsLock.Lock()
+	defer JsLock.Unlock()
 	JsTicket = util.GetJsApiTicket(Token)
 }
 
