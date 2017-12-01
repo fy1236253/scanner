@@ -63,7 +63,6 @@ func TicketHandle(ytJSON string) *IntegralReq {
 		// 商铺名称查找
 		name := recongnitionName(v.Itemstring)
 		if name != "" {
-			log.Println(name)
 			shop = name
 		}
 		// 小票金额查找
@@ -102,11 +101,12 @@ func TicketHandle(ytJSON string) *IntegralReq {
 	result.Shop = shop
 	result.Medicine = drugItem
 	// 三个必须参数不能为空
+	log.Printf("[shop]:%s", shop)
+	log.Printf("[orderid]:%s", unionid)
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
 	}
-	log.Println(result)
 	return result
 }
 

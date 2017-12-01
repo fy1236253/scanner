@@ -226,7 +226,6 @@ func ConfigWebHTTP() {
 		f, _, _ := r.FormFile("img")
 		defer f.Close()
 		rate := r.FormValue("rate")
-		log.Println(rate)
 		rateInt, _ := strconv.Atoi(rate)
 		var result model.CommonResult
 		if rateInt > 1 {
@@ -248,7 +247,6 @@ func ConfigWebHTTP() {
 		base64Str := base64.StdEncoding.EncodeToString(imgByte)
 		var res *tencent.IntegralReq
 		recongnition, types := tencent.YoutuRequest(base64Str)
-		log.Println(types)
 		if recongnition ==""{
 			log.Println("fail to connect tencent")
 			result.ErrMsg = "1"
