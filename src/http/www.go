@@ -222,7 +222,7 @@ func ConfigWebHTTP() {
 			log.Println("需要在微信中打开")
 		}
 		openid := sess.Get("openid").(string)
-		uuid := model.CreateNewID(12)
+		uuid := tencent.CreateNewID(12)
 		f, _, _ := r.FormFile("img")
 		defer f.Close()
 		rate := r.FormValue("rate")
@@ -255,6 +255,7 @@ func ConfigWebHTTP() {
 			RenderJson(w, result)
 			return
 		}
+
 		if types == 2 {
 			res = tencent.TicketHandle(recongnition)
 		} else {
