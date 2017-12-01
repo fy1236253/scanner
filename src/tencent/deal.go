@@ -163,7 +163,7 @@ func TicketHandleSecond(ytJSON string) *IntegralReq {
 
 // RecongnitionOrderNum 处理订单中的编号
 func RecongnitionOrderNum(str string) string { //加上单据号搜索
-	regular := `^(单据号|单据).*\d+|\d{15}`
+	regular := `^(单据号|单据|单号).*\d+|\d{15}`
 	match, name := commonMatch(regular, str)
 	log.Println(name)
 	reg := regexp.MustCompile("[\u4E00-\u9FA5].")
