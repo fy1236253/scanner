@@ -6,52 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/scan.css">
-    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="icon" sizes="any" mask="" href="img/favicon.ico">
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
     <title>药品单扫描</title>
 </head>
 
 <body class="content-body">
-    <div class="container weui-tab" id="tab">
-        <header>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="col-xs-6  col-sm-6 col-md-6 col-lg-6 col-md-offset-3 col-xs-offset-3 col-sm-offset-3 col-lg-offset-3">
-                    <img src="img/company.png" class="img-responsive company-img" alt="Image">
-                </div>
-            </div>
-        </header>
-        <div class="weui-tab">
-            <p class="mtop20 color-white">请保持小票平整，小票票头，票尾在框内</p>
-            <div class="weui-cells weui-cells_form" id="uploaderCustom">
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <div class="weui-uploader">
-                            <div class="weui-uploader__hd">
-                                <p class="weui-uploader__title">图片上传</p>
-                            </div>
-                            <div class="weui-uploader__bd">
-                                <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
-                                <div class="weui-uploader__input-box">
-                                    <input id="uploaderCustomInput" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="weui-btn-area">
-                <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a>
-            </div>
-        </div>
-        <footer>客服电话:0575-88137870</footer>
-    </div>
-
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+      </div>
 </body>
 
 </html>
-<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
 <script type="text/javascript">
     /* 图片手动上传 */
     // 通过config接口注入权限验证配置
