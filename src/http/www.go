@@ -257,9 +257,9 @@ func ConfigWebHTTP() {
 		}
 
 		if types == 2 {
-			res = tencent.TicketHandle(recongnition)
-		} else {
 			res = tencent.TicketHandleSecond(recongnition)
+		} else {
+			res = tencent.TicketHandle(recongnition)
 		}
 		result.ErrMsg = "success"
 		if res == nil {
