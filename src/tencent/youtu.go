@@ -88,7 +88,10 @@ func YoutuRequest(img string) (res string, types int) {
 	data, _ := json.Marshal(b)
 	resp, _ := YouTuGet(sign, url, string(data))
 	res = string(resp)
-	log.Println(res)
+	if res == "" {
+		log.Println("tencent return nil")
+		return "", 0
+	}
 	types = RecongnitionType(string(resp))
 	return
 }

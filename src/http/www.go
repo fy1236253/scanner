@@ -249,6 +249,12 @@ func ConfigWebHTTP() {
 		var res *tencent.IntegralReq
 		recongnition, types := tencent.YoutuRequest(base64Str)
 		log.Println(types)
+		if recongnition ==""{
+			log.Println("fail to connect tencent")
+			result.ErrMsg = "1"
+			RenderJson(w, result)
+			return
+		}
 		if types == 2 {
 			res = tencent.TicketHandle(recongnition)
 		} else {
