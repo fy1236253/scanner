@@ -211,7 +211,7 @@ func recongnitionName(str string) string {
 
 // recongnitionDrug 识别药品
 func recongnitionDrug(str string) string {
-	regular := `\p{Han}{2,}`
+	regular := `\p{Han}{3,}`
 	match, drug := commonMatch(regular, str)
 	if match {
 		return drug
