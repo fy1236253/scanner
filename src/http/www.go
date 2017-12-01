@@ -80,7 +80,7 @@ func ConfigWebHTTP() {
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		user := r.FormValue("openid")
-		log.Println(user)
+		log.Println(r.Form)
 		if sess.Get("openid") == nil {
 			sess.Set("openid", user)
 		}
