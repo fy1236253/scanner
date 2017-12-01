@@ -59,7 +59,6 @@ func TicketHandle(ytJSON string) *IntegralReq {
 		return nil
 	}
 	for _, v := range res.Items { //轮训关键字
-		log.Println(v)
 		// 商铺名称查找
 		name := recongnitionName(v.Itemstring)
 		if name != "" {
