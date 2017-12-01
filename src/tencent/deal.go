@@ -59,6 +59,7 @@ func TicketHandle(ytJSON string) *IntegralReq {
 		return nil
 	}
 	for _, v := range res.Items { //轮训关键字
+		log.Println(v)
 		// 商铺名称查找
 		name := recongnitionName(v.Itemstring)
 		if name != "" {
@@ -165,8 +166,7 @@ func TicketHandleSecond(ytJSON string) *IntegralReq {
 func RecongnitionOrderNum(str string) string { //加上单据号搜索
 	regular := `^(单据号|单据|单号).*\d+|\d{15}`
 	match, name := commonMatch(regular, str)
-	log.Println(name)
-	reg := regexp.MustCompile("[\u4E00-\u9FA5].")
+	reg := regexp.MustCompile("[\u4E00-\u9FA5].:")
 	name = reg.ReplaceAllLiteralString(name, "")
 	if match {
 		return name
