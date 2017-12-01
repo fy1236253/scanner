@@ -53,6 +53,7 @@ func TicketHandle(ytJSON string) *IntegralReq {
 	var drugName string
 	var drugItem []*MedicineList
 	var sortAmount sort.Float64Slice
+	ytJSON = strings.Trim(ytJSON, " ")
 	json.Unmarshal([]byte(ytJSON), &res)
 	if len(res.Items) == 0 {
 		log.Println(res)
