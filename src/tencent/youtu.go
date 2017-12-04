@@ -54,7 +54,7 @@ func (as *AppSign) YTSign() string {
 }
 
 //NewAppSign 新建应用签名
-func NewAppSign(appID, secretID, secretKey, userID string) (as AppSign, err error) {
+func NewAppSign(appID, secretID, secretKey, userID string) (as AppSign) {
 	as = AppSign{
 		appID:     appID,
 		secretID:  secretID,
@@ -78,7 +78,7 @@ func YoutuRequest(img string) (res string, types int) {
 	secretKey := "TihRyKn6C3f3JL8g04zgCUaR4RZZM4Zq"
 	userID := "573239309"
 	url := "https://api.youtu.qq.com/youtu/ocrapi/generalocr"
-	as, _ := NewAppSign(appID, secretID, secretKey, userID)
+	as := NewAppSign(appID, secretID, secretKey, userID)
 	sign := as.YTSign()
 	b := YTRequest{}
 	b.Appid = appID

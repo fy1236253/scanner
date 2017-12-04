@@ -201,8 +201,8 @@ func ConfigWebHTTP() {
 		}
 		imgByte, _ := ioutil.ReadAll(f)
 		base64Str := base64.StdEncoding.EncodeToString(imgByte)
-		var res *tencent.IntegralReq
-		recongnition, types := tencent.YoutuRequest(base64Str)
+		var res *model.IntegralReq
+		recongnition, types := model.BatImageRecognition(base64Str)
 		if recongnition == "" {
 			log.Println("fail to connect tencent")
 			result.ErrMsg = "1"
@@ -211,9 +211,9 @@ func ConfigWebHTTP() {
 		}
 
 		if types == 2 {
-			res = tencent.TicketHandleSecond(recongnition)
+			res = model.SecondLocalImageRecognition(recongnition)
 		} else {
-			res = tencent.TicketHandle(recongnition)
+			res = model.FirstLocalImageRecognition(recongnition)
 		}
 		result.ErrMsg = "success"
 		if res == nil {

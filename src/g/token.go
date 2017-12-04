@@ -31,6 +31,7 @@ func AccessTokenRequest() (token string) {
 	return
 }
 
+// StartToken 进程中维护token
 func StartToken() {
 	go TokenCacheInit()
 }
@@ -39,7 +40,7 @@ func StartToken() {
 func TokenCacheInit() {
 	for {
 		if Expires <= 0 {
-			Token = AccessTokenRequest()
+			setToken()
 			SetJsAPITicket()
 			Expires = int(7000)
 		} else {
@@ -47,6 +48,12 @@ func TokenCacheInit() {
 			Expires--
 		}
 	}
+}
+
+func setToken() {
+	JsLock.Lock()
+	defer JsLock.Unlock()
+	Token = AccessTokenRequest()
 }
 
 // SetJsAPITicket ticket设置
