@@ -195,6 +195,7 @@ func ConfigWebHTTP() {
 			RenderJson(w, result)
 			return
 		}
+		log.Println(openid)
 		if f == nil || openid == "" {
 			log.Println("未检测到文件")
 			return
