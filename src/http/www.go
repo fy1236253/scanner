@@ -83,6 +83,7 @@ func ConfigWebHTTP() {
 		if sess.Get("openid") == nil {
 			sess.Set("openid", user)
 		}
+		log.Println(user)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "index.html")
 		if !file.IsExist(f) {
