@@ -252,7 +252,7 @@ func SecondMidStr(result BATResult) int {
 func recongnitionOrderNum(str string) string { //加上单据号搜索
 	regular := `^(单据号|单据|单号).*.\d+|\d{15}`
 	match, name := commonMatch(regular, str)
-	reg := regexp.MustCompile("[\u4E00-\u9FA5].:")
+	reg := regexp.MustCompile("[\u4E00-\u9FA5]+?:")
 	name = reg.ReplaceAllLiteralString(name, "")
 	if match {
 		return name
