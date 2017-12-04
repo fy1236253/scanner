@@ -77,6 +77,8 @@ func ConfigWebHTTP() {
 		nonce := strconv.Itoa(rand.Intn(999999999))
 		ts := time.Now().Unix()
 		// sign := util.WXConfigSign(g.GetJsAPITicket(), nonce, strconv.FormatInt(ts, 10), fullurl)
+		body, _ := ioutil.ReadAll(r.Body)
+		log.Println(body)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		user := r.FormValue("openid")
