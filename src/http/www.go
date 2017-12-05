@@ -339,7 +339,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-		RenderJson(w, `{"test":"test"}`)
+		RenderJson(w, "success")
 		return
 	})
 }
