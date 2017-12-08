@@ -41,6 +41,7 @@ type WechatConfig struct {
 	WxID      string `json:"WxId"`
 	AppSecret string `json:"AppSecret"`
 	AppID     string `json:"AppId"`
+	Token     string `json:"token"`
 }
 
 //Config 获取配置信息

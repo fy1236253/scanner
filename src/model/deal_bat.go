@@ -85,10 +85,9 @@ func GetIntegral(pkg *IntegralReq) (response *IntegralResponse) {
 
 // BatImageRecognition 百度的图像识别接口
 func BatImageRecognition(base64Str string) (string, int) {
-	url := "https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.1f248484d5b7faf54537dfae92fed52c.2592000.1512598910.282335-10330945"
+	url := "https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=" + g.Config().Wechats[0].Token
 	req := httplib.Post(url).SetTimeout(3*time.Second, 1*time.Minute)
 	req.Header("Content-Type", "application/x-www-form-urlencoded")
-	// req.Body("{\"img\":" + base64Str + "}")
 	req.Param("image", base64Str)
 	resp, err := req.String()
 	if err != nil {
