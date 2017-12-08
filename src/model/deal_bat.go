@@ -78,7 +78,7 @@ func GetIntegral(pkg *IntegralReq) (response *IntegralResponse) {
 	req.Param("json", string(ps))
 	log.Println(string(ps))
 	resp, _ := req.String()
-	log.Println(resp)
+	// log.Println(resp)
 	json.Unmarshal([]byte(resp), &response)
 	return response
 }
