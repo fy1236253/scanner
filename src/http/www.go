@@ -339,7 +339,10 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-		RenderJson(w, "success")
+		p := make(map[string]string)
+		p["name"] = "fengya"
+		p["age"] = "23"
+		RenderJson(w, p)
 		return
 	})
 }
